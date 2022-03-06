@@ -30,7 +30,7 @@ class MainViewModel : ViewModel() {
      * 取得User List
      */
     suspend fun getUserList() {
-        val response = UserApi.retrofitService.userListAsync().awaitResponse()
+        val response = UserApi.retrofitService.userListAsync(0, 100).awaitResponse()
         val userListResponse = response.body()
         val userList = userListResponse?.asModel()
         this.userList.value = userList ?: emptyList()

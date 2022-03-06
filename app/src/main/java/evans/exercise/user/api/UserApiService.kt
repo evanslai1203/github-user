@@ -9,6 +9,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 import java.io.IOException
 import java.net.InetSocketAddress
 import java.net.Socket
@@ -38,7 +39,10 @@ private val retrofit = Retrofit.Builder()
 
 interface UserApiService {
     @GET("users")
-    fun userListAsync(): Call<List<UserResponse>>
+    fun userListAsync(
+        @Query("since") since: Int,
+        @Query("per_page") perPage: Int
+    ): Call<List<UserResponse>>
 
     @GET("users/{username}")
     fun getUserDetail(@Path("username") login: String): Call<UserDetailResponse>
